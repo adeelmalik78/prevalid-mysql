@@ -5,7 +5,7 @@ This repository shows how to setup Liquibase pipeline with script validation for
 Instead of running `liquibase update` against your target database, you would replace it with a flow file: 
 ```liquibase flow --flow-file=flowfiles/liquibase.flowfile-wprevalidate.yaml```
 
-A number of environment variables are needed to be setup, as shown in `runme.sh` script.
+A number of environment variables are needed to be setup, as shown in [runme.sh](runme.sh) script.
 
 ## Environment variables
 Following variables needed to set before running
@@ -27,11 +27,11 @@ LIQUIBASE_COMMAND_CHANGELOG_FILE
 
 ## Flow files
 Following flow files are provided:
-* `liquibase.flowfile-wprevalidate.yaml`: This is the main flow file. 
-* `clone-setup.yaml` - (child flow file) takes backup of the target database, creates a cloned database
-* `clone-cleanup.yaml` - (child flow file) removes cloned database
-* `liquibase.testprevalid` - (optiona) simple flow file to test clone setup and cleanup
-* `liquibase.flowfile.yaml` - (optiona) This is a normal flow file which does not invoke prevalidate
+* [liquibase.flowfile-wprevalidate.yaml](liquibase.flowfile-wprevalidate.yaml): This is the main flow file. 
+* [clone-setup.yaml](clone-setup.yaml) - (child flow file) takes backup of the target database, creates a cloned database
+* [clone-cleanup.yaml](clone-cleanup.yaml) - (child flow file) removes cloned database
+* [liquibase.testprevalid](liquibase.testprevalid) - (optiona) simple flow file to test clone setup and cleanup
+* [liquibase.flowfile.yaml](liquibase.flowfile.yaml) - (optiona) This is a normal flow file which does not invoke prevalidate
 
 
 ## Docker
