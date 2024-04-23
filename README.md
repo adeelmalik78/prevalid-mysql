@@ -50,7 +50,7 @@ Use these docker commands to start a MySQL clone database. The only difference b
 
 ``` bash
 docker run -p 3366:3306 --name mysqldb_cloned -v ${PWD}/BASE:/BASE  -e MYSQL_ROOT_PASSWORD=password -d mysql
-
+# wait for the MySQL container to be setup
 docker exec -i mysqldb_cloned mysql --user=root --password=password -e "use sys; create database DEV;"
 ```
 
