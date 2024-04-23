@@ -4,9 +4,9 @@ globalVariables:
   ### Files
   ### Use absolute paths when using Liquibase's Docker container
   ###
-  BASE_DIR: "./"
-  DIFF_FILE: "${BASE_DIR}/Diff_${LB_ENVIRONMENT}.json"
-  SNAPSHOT_FILE: "Snapshot_${LB_ENVIRONMENT}.json"
+  BASE_DIR: "BASE"
+  DIFF_FILE: "${LIQUIBASE_REPORTS_PATH}/Diff_${LB_ENVIRONMENT}.json"
+  SNAPSHOT_FILE: "${BASE_DIR}/Snapshot_${LB_ENVIRONMENT}.json"
 stages:
 
   ## The first stage of actions

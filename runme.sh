@@ -11,6 +11,9 @@ export LIQUIBASE_COMMAND_USERNAME=root
 export LIQUIBASE_COMMAND_PASSWORD=password
 export LIQUIBASE_COMMAND_CHANGELOG_FILE=Changelogs/changelog.sql
 
+export LIQUIBASE_REPORTS_ENABLED=true
+export LIQUIBASE_REPORTS_PATH=report
+
 rm -rf report
 
 liquibase flow --flow-file=liquibase.flowfile-wprevalidate.yaml
