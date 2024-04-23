@@ -42,3 +42,12 @@ docker exec -it mysqldb /bin/bash -c "mysqldump --password=password DEV > BASE/D
 Command to restore MySQL:
 ```
 ```
+
+## Liquibase Pro features in use
+
+* Drift detection
+* Operations reports
+* Quality Checks
+* Flow files
+* Liquibase Pro commands: 
+    * `rollback-one-update`

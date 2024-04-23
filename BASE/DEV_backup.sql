@@ -46,7 +46,7 @@ CREATE TABLE `DATABASECHANGELOG` (
 
 LOCK TABLES `DATABASECHANGELOG` WRITE;
 /*!40000 ALTER TABLE `DATABASECHANGELOG` DISABLE KEYS */;
-INSERT INTO `DATABASECHANGELOG` VALUES ('table1','adeel','Changelogs/changelog.sql','2024-04-23 14:38:07',1,'EXECUTED','9:257c4cfa117d0219dfbbfb59332807b6','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('table2','adeel','Changelogs/changelog.sql','2024-04-23 14:38:08',2,'EXECUTED','9:bcfdf47d5a2c2ab1d70024751fca4280','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('person','adeel','Changelogs/changelog.sql','2024-04-23 14:38:08',3,'EXECUTED','9:0c2c667b1df206c1d693e914df198429','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('insert_adeel','amalik','Changelogs/changelog.sql','2024-04-23 14:38:08',4,'EXECUTED','9:d599d2a6a13e2e10deb0a7b0ed696f5d','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('insert_amy','amalik','Changelogs/changelog.sql','2024-04-23 14:38:08',5,'EXECUTED','9:650ff14fd77c533f209c47d2aa4b93a2','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('insert_roderick','amalik','Changelogs/changelog.sql','2024-04-23 14:38:08',6,'EXECUTED','9:3f53595f94d847870625538d7b6dc425','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('update_adeel','amalik','Changelogs/changelog.sql','2024-04-23 14:38:08',7,'EXECUTED','9:ab8d913fba0424cc45b3894d4db31cc4','sql','','adeel','4.27.0',NULL,NULL,'3883087933'),('employee','adeel','Changelogs/changelog.sql','2024-04-23 16:52:57',8,'EXECUTED','9:6e0611eb75b941f8f4a71d294243ee53','sql','',NULL,'4.27.0',NULL,NULL,'3891177613');
+INSERT INTO `DATABASECHANGELOG` VALUES ('table1','adeel','Changelogs/changelog.sql','2024-04-23 14:38:07',1,'EXECUTED','9:257c4cfa117d0219dfbbfb59332807b6','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('table2','adeel','Changelogs/changelog.sql','2024-04-23 14:38:08',2,'EXECUTED','9:bcfdf47d5a2c2ab1d70024751fca4280','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('person','adeel','Changelogs/changelog.sql','2024-04-23 14:38:08',3,'EXECUTED','9:0c2c667b1df206c1d693e914df198429','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('insert_adeel','amalik','Changelogs/changelog.sql','2024-04-23 14:38:08',4,'EXECUTED','9:d599d2a6a13e2e10deb0a7b0ed696f5d','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('insert_amy','amalik','Changelogs/changelog.sql','2024-04-23 14:38:08',5,'EXECUTED','9:650ff14fd77c533f209c47d2aa4b93a2','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('insert_roderick','amalik','Changelogs/changelog.sql','2024-04-23 14:38:08',6,'EXECUTED','9:3f53595f94d847870625538d7b6dc425','sql','',NULL,'4.27.0',NULL,NULL,'3883087933'),('update_adeel','amalik','Changelogs/changelog.sql','2024-04-23 14:38:08',7,'EXECUTED','9:ab8d913fba0424cc45b3894d4db31cc4','sql','','adeel','4.27.0',NULL,NULL,'3883087933'),('employee','adeel','Changelogs/changelog.sql','2024-04-23 16:52:57',8,'EXECUTED','9:6e0611eb75b941f8f4a71d294243ee53','sql','','adeel','4.27.0',NULL,NULL,'3891177613'),('contractors','adeel','Changelogs/changelog.sql','2024-04-23 17:11:32',9,'EXECUTED','9:4df66b1f22220706480f362096d8eb2f','sql','',NULL,'4.27.0',NULL,NULL,'3892292330');
 /*!40000 ALTER TABLE `DATABASECHANGELOG` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,6 +74,32 @@ LOCK TABLES `DATABASECHANGELOGLOCK` WRITE;
 /*!40000 ALTER TABLE `DATABASECHANGELOGLOCK` DISABLE KEYS */;
 INSERT INTO `DATABASECHANGELOGLOCK` VALUES (1,0,NULL,NULL);
 /*!40000 ALTER TABLE `DATABASECHANGELOGLOCK` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contractors`
+--
+
+DROP TABLE IF EXISTS `contractors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `contractors` (
+  `id` int NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `address1` varchar(50) DEFAULT NULL,
+  `address2` varchar(50) DEFAULT NULL,
+  `city` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contractors`
+--
+
+LOCK TABLES `contractors` WRITE;
+/*!40000 ALTER TABLE `contractors` DISABLE KEYS */;
+/*!40000 ALTER TABLE `contractors` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -188,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-23 16:56:29
+-- Dump completed on 2024-04-23 17:13:17

@@ -1,0 +1,20 @@
+{
+  "diff": {
+    "diffFormat": 1,
+    "created": "Tue Apr 23 12:13:17 CDT 2024",
+    "databases": {
+      "reference": {
+        "majorVersion": "8",
+        "minorVersion": "3",
+        "name": "Offline mysql",
+        "url": "offline:mysql?snapshot=Snapshot_DEV.json"
+      },
+      "target": {
+        "majorVersion": "8",
+        "minorVersion": "3",
+        "name": "MySQL",
+        "url": "jdbc:mysql://localhost:3306/DEV"
+      }
+    }
+  }
+}

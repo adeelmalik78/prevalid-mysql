@@ -65,7 +65,12 @@ stages:
       - type: liquibase
         command: update
         cmdArgs: { URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}",
-                    reports-enabled: "false"
+                   format: json, 
+                   drift-severity: "1",  
+                   drift-severity-missing: "2", 
+                   drift-severity-unexpected: "3",
+                   drift-severity-changed: "4",
+                   reports-name: "update_cloned-report.html"
                  }
       #
       # Validate rollback
@@ -80,7 +85,12 @@ stages:
       - type: liquibase
         command: rollback
         cmdArgs: { tag: "${LIQUIBASE_COMMAND_TAG}", URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}",
-                    reports-enabled: "false"
+                   format: json, 
+                   drift-severity: "1",  
+                   drift-severity-missing: "2", 
+                   drift-severity-unexpected: "3",
+                   drift-severity-changed: "4",
+                   reports-name: "rollback_cloned-report.html"
                  }
       #
       # Tag the existing database

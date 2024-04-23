@@ -1,4 +1,5 @@
 driftdetection.txt
 liquibase.properties
-Snapshots/
+Snapshot_*
 report/
+

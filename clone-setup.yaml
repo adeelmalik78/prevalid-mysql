@@ -5,6 +5,7 @@ stages:
       # This step takes the backup of the target database, using mysqldump command
       - type: shell
         command: docker exec -i mysqldb /bin/bash -c "mysqldump --user=root --password=password DEV > BASE/DEV_backup.sql"
+        # command: mysqldump --user=root --password=password DEV > BASE/DEV_backup.sql
 
   ## Setup cloned MySQL database
   Setup MySQL Clone:
@@ -15,12 +16,14 @@ stages:
       - type: shell
         command: |
             echo "Waiting 10 seconds for cloned database to be available ..." && sleep 10
+            # what are the ways to check if the docker container is up and ready?
 
       - type: shell
         command: docker exec -i mysqldb_cloned mysql --user=root --password=password -e "use sys; create database DEV; create database TEST; create database PROD;"
 
       - type: shell
         command: docker exec -i mysqldb_cloned /bin/bash -c "mysql --user=root --password=password DEV < BASE/DEV_backup.sql"
+        # command: mysql --user=root --password=password DEV < BASE/DEV_backup.sql
 
 
   
