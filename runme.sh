@@ -14,7 +14,8 @@ export LIQUIBASE_COMMAND_CHANGELOG_FILE=Changelogs/changelog.sql
 export LIQUIBASE_REPORTS_ENABLED=true
 export LIQUIBASE_REPORTS_PATH=report
 
-rm -rf report
+# Clear reports directory - no necessary when running from CICD pipeline
+# rm -rf report
 
 liquibase flow --flow-file=flowfiles/liquibase.flowfile-wprevalidate.yaml
 
