@@ -61,15 +61,15 @@ create table employee (
 )
 --rollback drop table employee
 
---changeset adeel:contractors
-create table contractors (
-    id int primary key,
-    name varchar(50) not null,
-    address1 varchar(50),
-    address2 varchar(50),
-    city varchar(30)
-)
---rollback drop table contractors
+-- --changeset adeel:contractors
+-- create table contractors (
+--     id int primary key,
+--     name varchar(50) not null,
+--     address1 varchar(50),
+--     address2 varchar(50),
+--     city varchar(30)
+-- )
+-- --rollback drop table contractors
 
 -- --changeset adeel:users
 -- create table users (

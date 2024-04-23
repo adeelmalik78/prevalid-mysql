@@ -16,8 +16,7 @@ stages:
       - type: shell
         command: |
             echo "Waiting ${SECONDS_TO_WAIT} seconds for cloned database to be available ..." && sleep ${SECONDS_TO_WAIT}
-            # what are the ways to check if the docker container is up and ready?
-
+ 
       - type: shell
         command: docker exec -i mysqldb_cloned mysql --user=${CLONED_UID} --password=${CLONED_PW} -e "use sys; create database ${CLONED_DB};"
 

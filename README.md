@@ -46,8 +46,14 @@ Command to take a backup:
 docker exec -it mysqldb /bin/bash -c "mysqldump --password=password DEV > BASE/DEV_backup.sql"
 ```
 
-Command to restore MySQL:
+Command to restore/import MySQL:
 ```
+docker exec -i mysqldb_cloned /bin/bash -c "mysql --user=root --password=password DEV < BASE/DEV_backup.sql"
+```
+
+Command to destroy cloned DB:
+```
+docker rm -f mysqldb_cloned
 ```
 
 ## Liquibase Pro features in use
