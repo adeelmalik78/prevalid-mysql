@@ -27,11 +27,11 @@ LIQUIBASE_COMMAND_CHANGELOG_FILE
 
 ## Flow files
 Following flow files are provided:
-* [flowfiles/liquibase.flowfile-wprevalidate.yaml](liquibase.flowfile-wprevalidate.yaml): This is the main flow file. 
-* [flowfiles/clone-setup.yaml](clone-setup.yaml) - (child flow file) takes backup of the target database, creates a cloned database
-* [flowfiles/clone-cleanup.yaml](clone-cleanup.yaml) - (child flow file) removes cloned database
-* [flowfiles/liquibase.testprevalid](liquibase.testprevalid) - (optiona) simple flow file to test clone setup and cleanup
-* [flowfiles/liquibase.flowfile.yaml](liquibase.flowfile.yaml) - (optiona) This is a normal flow file which does not invoke prevalidate
+* [liquibase.flowfile-wprevalidate.yaml](flowfiles/liquibase.flowfile-wprevalidate.yaml): This is the main flow file. 
+* [clone-setup.yaml](flowfiles/clone-setup.yaml) - (child flow file) takes backup of the target database, creates a cloned database
+* [clone-cleanup.yaml](flowfiles/clone-cleanup.yaml) - (child flow file) removes cloned database
+* [liquibase.testprevalid](flowfiles/liquibase.testprevalid) - (optiona) simple flow file to test clone setup and cleanup
+* [liquibase.flowfile.yaml](flowfiles/liquibase.flowfile.yaml) - (optiona) This is a normal flow file which does not invoke prevalidate
 
 
 ## Docker
