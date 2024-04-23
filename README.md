@@ -1,5 +1,12 @@
 # Prevalid - MYSQL
 
+This repository shows how to setup Liquibase pipeline with script validation for MySQL database.
+
+Instead of running `liquibase update` against your target database, you would replace it with a flow file: 
+```liquibase flow --flow-file=flowfiles/liquibase.flowfile-wprevalidate.yaml```
+
+A number of environment variables are needed to be setup, as shown in `runme.sh` script.
+
 ## Environment variables
 Following variables needed to set before running
 ``` bash
