@@ -54,12 +54,6 @@ stages:
         command: updateSQL
         cmdArgs: { URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}" }
       #
-      # Tag the database
-      #
-      - type: liquibase
-        command: tag
-        cmdArgs: { tag: "${LIQUIBASE_COMMAND_TAG}", URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}" }
-      #
       # Update the database
       #
       - type: liquibase
@@ -76,15 +70,15 @@ stages:
       # Validate rollback
       #
       - type: liquibase
-        command: rollbackSQL
+        command: rollback-one-update-SQL
         cmdArgs: { URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}" }
       #
       #
       # Execute rollback
       #
       - type: liquibase
-        command: rollback
-        cmdArgs: { tag: "${LIQUIBASE_COMMAND_TAG}", URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}",
+        command: rollback-one-update
+        cmdArgs: { force: "true", URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}",
                    format: json, 
                    drift-severity: "1",  
                    drift-severity-missing: "2", 
@@ -92,11 +86,6 @@ stages:
                    drift-severity-changed: "4",
                    reports-name: "rollback_cloned-report.html"
                  }
-      #
-      # Tag the existing database
-      #
-      - type: liquibase
-        command: tag
       #
       # Update the database
       #
@@ -115,7 +104,7 @@ stages:
       #
       - type: liquibase
         command: snapshot
-        globalArgs: { outputfile: "${BASE_DIR}/${SNAPSHOT_FILE}" }
+        globalArgs: { outputfile: "${SNAPSHOT_FILE}" }
         cmdArgs: { snapshotFormat: "json" }
       
 
