@@ -16,5 +16,5 @@ export LIQUIBASE_REPORTS_PATH=report
 
 rm -rf report
 
-liquibase flow --flow-file=liquibase.flowfile-wprevalidate.yaml
+liquibase flow --flow-file=flowfiles/liquibase.flowfile-wprevalidate.yaml
 
