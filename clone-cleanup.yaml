@@ -1,0 +1,9 @@
+stages:
+  ## The first stage of actions
+  Cleanup MySQL Clone:
+    actions:
+      #
+      # Drop the clone
+      #
+      - type: shell
+        command: docker rm -f mysqldb_cloned

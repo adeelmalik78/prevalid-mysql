@@ -1,0 +1,26 @@
+stages:
+  ## Take backup of the existing MySQL database
+  Take MySQL Backup:
+    actions:
+      # This step takes the backup of the target database, using mysqldump command
+      - type: shell
+        command: docker exec -i mysqldb /bin/bash -c "mysqldump --user=root --password=password DEV > BASE/DEV_backup.sql"
+
+  ## Setup cloned MySQL database
+  Setup MySQL Clone:
+    actions:
+      - type: shell
+        command: docker run -p 3366:3306 --name mysqldb_cloned -v ${PWD}/BASE/DEV_backup.sql:/BASE/DEV_backup.sql -e MYSQL_ROOT_PASSWORD=password -d mysql
+
+      - type: shell
+        command: |
+            echo "Waiting 10 seconds for cloned database to be available ..." && sleep 10
+
+      - type: shell
+        command: docker exec -i mysqldb_cloned mysql --user=root --password=password -e "use sys; create database DEV; create database TEST; create database PROD;"
+
+      - type: shell
+        command: docker exec -i mysqldb_cloned /bin/bash -c "mysql --user=root --password=password DEV < BASE/DEV_backup.sql"
+
+
+  
