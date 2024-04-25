@@ -10,12 +10,18 @@ globalVariables:
 stages:
 
   ## The first stage of actions
-  Default:
+  Status and Checks:
     actions:
+      #
+      # Status - Show pending changes
+      #
+      - type: shell
+        command: ./get_pending_changes.sh
       #
       # Quality Checks for changelog
       #
       - type: liquibase
+        if: "${PENDING_CHANGES} != 0"
         command: checks run
         cmdArgs: {checks-scope: changelog,
                   reports-name: "checks-report.html"
@@ -45,18 +51,21 @@ stages:
       #  Create clone
       #
       - type: liquibase
+        if: "${PENDING_CHANGES} != 0"
         command: flow
         cmdArgs: {flowFile: "flowfiles/clone-setup.yaml"}
       #
       # Review pending changes
       #
       - type: liquibase
+        if: "${PENDING_CHANGES} != 0"
         command: updateSQL
         cmdArgs: { URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}" }
       #
       # Update the database
       #
       - type: liquibase
+        if: "${PENDING_CHANGES} != 0"
         command: update
         cmdArgs: { URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}",
                    format: json, 
@@ -70,6 +79,7 @@ stages:
       # Validate rollback
       #
       - type: liquibase
+        if: "${PENDING_CHANGES} != 0"
         command: rollback-one-update-SQL
         cmdArgs: { URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}" }
       #
@@ -77,6 +87,7 @@ stages:
       # Execute rollback
       #
       - type: liquibase
+        if: "${PENDING_CHANGES} != 0"
         command: rollback-one-update
         cmdArgs: { force: "true", URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}",
                    format: json, 
@@ -90,6 +101,7 @@ stages:
       # Update the database
       #
       - type: liquibase
+        if: "${PENDING_CHANGES} != 0"
         command: update
         cmdArgs: {
                    format: json, 
@@ -103,6 +115,7 @@ stages:
       # Create updated snapshot
       #
       - type: liquibase
+        if: "${PENDING_CHANGES} != 0"
         command: snapshot
         globalArgs: { outputfile: "${SNAPSHOT_FILE}" }
         cmdArgs: { snapshotFormat: "json" }

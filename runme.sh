@@ -15,7 +15,7 @@ export LIQUIBASE_REPORTS_ENABLED=true
 export LIQUIBASE_REPORTS_PATH=report
 
 # Clear reports directory - no necessary when running from CICD pipeline
-# rm -rf report
+rm -rf report
 
 liquibase flow --flow-file=flowfiles/liquibase.flowfile-wprevalidate.yaml
 

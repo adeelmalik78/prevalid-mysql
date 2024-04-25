@@ -30,9 +30,13 @@ Following flow files are provided:
 * [liquibase.flowfile-wprevalidate.yaml](flowfiles/liquibase.flowfile-wprevalidate.yaml): This is the main flow file. 
 * [clone-setup.yaml](flowfiles/clone-setup.yaml) - (child flow file) takes backup of the target database, creates a cloned database
 * [clone-cleanup.yaml](flowfiles/clone-cleanup.yaml) - (child flow file) removes cloned database
-* [liquibase.testprevalid](flowfiles/liquibase.testprevalid) - (optiona) simple flow file to test clone setup and cleanup
-* [liquibase.flowfile.yaml](flowfiles/liquibase.flowfile.yaml) - (optiona) This is a normal flow file which does not invoke prevalidate
+* [zz_liquibase.testprevalid](flowfiles/zz_liquibase.testprevalid) - (optiona) simple flow file to test clone setup and cleanup
+* [zz_liquibase.flowfile.yaml](flowfiles/zz_liquibase.flowfile.yaml) - (optiona) This is a normal flow file which does not invoke prevalidate
 
+## Supporting scripts
+There are two support shell scripts provided:
+* [get_poending_changes.sh](get_pending_changes.sh): This script invokes `liquibase status` and stores number of pending changes in the `PENDING_CHANGES` environment variable.
+* [runme.sh](runme.sh): This is the overall orchestration script, aka, the entrypoint for running prevalidation.
 
 ## Docker
 Here are some docker commands that are used in `clone-setup.yaml` and `clone-cleanup.yaml` to perform various operations such as start a MySQL clone database, take a backup of MySQL database, perform a restore of MySQL database.
