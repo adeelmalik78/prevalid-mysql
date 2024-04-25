@@ -26,6 +26,7 @@ stages:
         # if: "${PENDING_CHANGES} != null"
         command: checks run
         cmdArgs: {checks-scope: changelog,
+                  changeset-filter: "PENDING",
                   reports-name: "checks-report.html"
                  }
 
@@ -80,11 +81,6 @@ stages:
         # if: "${PENDING_CHANGES} != null"
         command: update
         cmdArgs: { URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}",
-                   format: json, 
-                   drift-severity: "1",  
-                   drift-severity-missing: "2", 
-                   drift-severity-unexpected: "3",
-                   drift-severity-changed: "4",
                    reports-name: "update_cloned-report.html"
                  }
       #
@@ -102,11 +98,6 @@ stages:
         # if: "${PENDING_CHANGES} != null"
         command: rollback-one-update
         cmdArgs: { force: "true", URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}",
-                   format: json, 
-                   drift-severity: "1",  
-                   drift-severity-missing: "2", 
-                   drift-severity-unexpected: "3",
-                   drift-severity-changed: "4",
                    reports-name: "rollback_cloned-report.html"
                  }
 
@@ -118,14 +109,7 @@ stages:
       - type: liquibase
         # if: "${PENDING_CHANGES} != null"
         command: update
-        cmdArgs: {
-                   format: json, 
-                   drift-severity: "1",  
-                   drift-severity-missing: "2", 
-                   drift-severity-unexpected: "3",
-                   drift-severity-changed: "4",
-                   reports-name: "update-report.html"
-        }
+        cmdArgs: { reports-name: "update-report.html" }
       #
       # Create updated snapshot
       #
