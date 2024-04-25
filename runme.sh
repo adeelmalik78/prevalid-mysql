@@ -14,6 +14,9 @@ export LIQUIBASE_COMMAND_CHANGELOG_FILE=Changelogs/changelog.sql
 export LIQUIBASE_REPORTS_ENABLED=true
 export LIQUIBASE_REPORTS_PATH=report
 
+# export PENDING_CHANGES="cat found_changes.txt | awk '{print $1}'"
+export PENDING_CHANGES=`liquibase --show-banner=false status | grep -E 'changeset has not been applied' | awk '{print $1}' `
+
 # Clear reports directory - no necessary when running from CICD pipeline
 rm -rf report
 

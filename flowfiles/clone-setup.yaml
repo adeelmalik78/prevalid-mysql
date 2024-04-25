@@ -4,7 +4,7 @@ stages:
     actions:
       # This step takes the backup of the target database, using mysqldump command
       - type: shell
-        command: docker exec -i mysqldb /bin/bash -c "mysqldump --user=${LIQUIBASE_COMMAND_USERNAME} --password=${LIQUIBASE_COMMAND_PASSWORD} ${LB_ENVIRONMENT} > BASE/${LB_ENVIRONMENT}_backup.sql"
+        command: docker exec -i mysqldb /bin/bash -c "mysqldump --no-data --user=${LIQUIBASE_COMMAND_USERNAME} --password=${LIQUIBASE_COMMAND_PASSWORD} ${LB_ENVIRONMENT} > BASE/${LB_ENVIRONMENT}_backup.sql"
         # command: mysqldump --user=${CLONED_UID} --password=${CLONED_PW} ${CLONED_DB} > BASE/${LB_ENVIRONMENT}_backup.sql
 
   ## Setup cloned MySQL database

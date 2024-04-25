@@ -15,22 +15,28 @@ stages:
       #
       # Status - Show pending changes
       #
-      - type: shell
-        command: ./get_pending_changes.sh
+      - type: liquibase
+        command: status
+      # - type: shell
+      #   command: echo PENDING_CHANGES=${PENDING_CHANGES}
       #
       # Quality Checks for changelog
       #
       - type: liquibase
-        if: "${PENDING_CHANGES} != 0"
+        # if: "${PENDING_CHANGES} != null"
         command: checks run
         cmdArgs: {checks-scope: changelog,
                   reports-name: "checks-report.html"
                  }
+
+  Drift Detection:
+    actions:
       #
       # Run diff
       # Update database type in cmdArgs (e.g., oracle, mssql, etc.)
       #
       - type: liquibase
+        # if: "${PENDING_CHANGES} != null"
         command: diff
         globalArgs: { outputfile: "${DIFF_FILE}" , reports-enabled: "true" }
         cmdArgs: { referenceURL: "offline:mysql?snapshot=${SNAPSHOT_FILE}", 
@@ -47,25 +53,31 @@ stages:
       #
       # - type: shell
       #   command: grep -E "unexpected|missing|changed" ${DIFF_FILE} >> /dev/null 2>&1 ; if [ $? -eq 0 ]; then exit 1; else exit 0; fi
-      ##
+      #
+
+  Clone MYSQL Database:
+    actions:
       #  Create clone
       #
       - type: liquibase
-        if: "${PENDING_CHANGES} != 0"
+        # if: "${PENDING_CHANGES} != null"
         command: flow
         cmdArgs: {flowFile: "flowfiles/clone-setup.yaml"}
+
+  Validate Changes On Cloned MySQL Database:
+    actions:
       #
       # Review pending changes
       #
       - type: liquibase
-        if: "${PENDING_CHANGES} != 0"
+        # if: "${PENDING_CHANGES} != null"
         command: updateSQL
         cmdArgs: { URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}" }
       #
       # Update the database
       #
       - type: liquibase
-        if: "${PENDING_CHANGES} != 0"
+        # if: "${PENDING_CHANGES} != null"
         command: update
         cmdArgs: { URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}",
                    format: json, 
@@ -79,7 +91,7 @@ stages:
       # Validate rollback
       #
       - type: liquibase
-        if: "${PENDING_CHANGES} != 0"
+        # if: "${PENDING_CHANGES} != null"
         command: rollback-one-update-SQL
         cmdArgs: { URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}" }
       #
@@ -87,7 +99,7 @@ stages:
       # Execute rollback
       #
       - type: liquibase
-        if: "${PENDING_CHANGES} != 0"
+        # if: "${PENDING_CHANGES} != null"
         command: rollback-one-update
         cmdArgs: { force: "true", URL: "${CLONED_URL}", USERNAME: "${CLONED_UID}", PASSWORD: "${CLONED_PW}",
                    format: json, 
@@ -97,11 +109,14 @@ stages:
                    drift-severity-changed: "4",
                    reports-name: "rollback_cloned-report.html"
                  }
+
+  Deploy Changes To Target MySQL Database:
+    actions:
       #
       # Update the database
       #
       - type: liquibase
-        if: "${PENDING_CHANGES} != 0"
+        # if: "${PENDING_CHANGES} != null"
         command: update
         cmdArgs: {
                    format: json, 
@@ -115,7 +130,7 @@ stages:
       # Create updated snapshot
       #
       - type: liquibase
-        if: "${PENDING_CHANGES} != 0"
+        # if: "${PENDING_CHANGES} != null"
         command: snapshot
         globalArgs: { outputfile: "${SNAPSHOT_FILE}" }
         cmdArgs: { snapshotFormat: "json" }

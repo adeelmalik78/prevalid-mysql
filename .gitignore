@@ -2,3 +2,4 @@ driftdetection.txt
 liquibase.properties
 report/
 **_backup.sql
+found_changes.txt
